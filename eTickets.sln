@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTickets", "eTickets\eTickets.csproj", "{284A4E52-085C-47A6-A508-98AC1A79D93C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTickets.PL", "eTickets\eTickets.PL.csproj", "{284A4E52-085C-47A6-A508-98AC1A79D93C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTickets.DAL", "eTickets.DAL\eTickets.DAL.csproj", "{84A51D47-F233-4864-B0B5-A4C54DC908AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTickets.BL", "eTickets.BL\eTickets.BL.csproj", "{0D453786-F74D-42D7-83C7-BADDD80A5743}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{284A4E52-085C-47A6-A508-98AC1A79D93C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{284A4E52-085C-47A6-A508-98AC1A79D93C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{284A4E52-085C-47A6-A508-98AC1A79D93C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84A51D47-F233-4864-B0B5-A4C54DC908AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A51D47-F233-4864-B0B5-A4C54DC908AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84A51D47-F233-4864-B0B5-A4C54DC908AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84A51D47-F233-4864-B0B5-A4C54DC908AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D453786-F74D-42D7-83C7-BADDD80A5743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D453786-F74D-42D7-83C7-BADDD80A5743}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D453786-F74D-42D7-83C7-BADDD80A5743}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D453786-F74D-42D7-83C7-BADDD80A5743}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
