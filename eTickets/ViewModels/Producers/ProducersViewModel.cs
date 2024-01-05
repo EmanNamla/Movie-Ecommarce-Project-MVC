@@ -1,13 +1,11 @@
-﻿namespace eTickets.DAL.Models
+﻿namespace eTickets.PL.ViewModels.Producers
 {
-    public class Producer:BaseEntity
+    public class ProducersViewModel
     {
         public string FullName { get; set; }
 
         public string ProfilePictureUrl { get; set; }
 
         public string Bio { get; set; }
-
-        public ICollection<Movie> Movies { get; set; }=new HashSet<Movie>();
     }
 }

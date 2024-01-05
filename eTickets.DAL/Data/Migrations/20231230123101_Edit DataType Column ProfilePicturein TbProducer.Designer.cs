@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eTickets.DAL.Contexts;
 
@@ -11,9 +12,10 @@ using eTickets.DAL.Contexts;
 namespace eTickets.DAL.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231230123101_Edit DataType Column ProfilePicturein TbProducer")]
+    partial class EditDataTypeColumnProfilePictureinTbProducer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,9 +107,8 @@ namespace eTickets.DAL.Data.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ImageURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("ImageURL")
+                        .HasColumnType("float");
 
                     b.Property<int>("MovieCategory")
                         .HasColumnType("int");

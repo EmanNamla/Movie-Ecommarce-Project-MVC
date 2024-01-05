@@ -1,0 +1,40 @@
+﻿@model ActorsViewModel
+<div class="row text">
+    <div class="row text" style="margin-bottom: 190px;">
+        <div class="col-md-8 offset-2">
+            <p>
+                <h1>Edit @Model.FullName</h1>
+            </p>
+            <div class="row">
+                <div class="col-md-8 offset-2">
+                    <form asp-action="Edit">
+                       
+
+                        <partial name="_partialviews\_createeditpartailview" />
+                      
+
+                        <div class="form-group mt-3 d-flex justify-content-between">
+                            <a class="btn btn-outline-secondary" asp-action="index">Show All</a>
+                            <input type="submit" value="Save" class="btn btn-outline-success" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#ProfilePictureUrl").val();
+        })
+
+        $("#ProfilePictureUrl").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        })
+    </script>
+}
+

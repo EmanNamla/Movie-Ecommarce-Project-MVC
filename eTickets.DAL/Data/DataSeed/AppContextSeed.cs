@@ -82,7 +82,15 @@ namespace eTickets.DAL.Data.DataSeed
                 try
                 {
                     var MoviesData = File.ReadAllText("../eTickets.DAL/Data/DataSeed/Movie.json");
-                    var Moviess = JsonSerializer.Deserialize<List<Movie>>(MoviesData);
+                    var options = new JsonSerializerOptions
+                    {
+                        WriteIndented = true,
+                        Converters =
+                        {
+                            new MovieCategoryConverter()
+                        }
+                    };
+                    var Moviess = JsonSerializer.Deserialize<List<Movie>>(MoviesData, options);
                     if (Moviess?.Count > 0)
                     {
                         foreach (var Movie in Moviess)

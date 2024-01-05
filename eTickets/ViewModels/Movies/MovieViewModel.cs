@@ -1,19 +1,14 @@
 ﻿using eTickets.DAL.Data.Enums;
-using eTickets.Models;
-using System;
-using System.Collections.Generic;
+using eTickets.DAL.Models;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace eTickets.DAL.Models
+namespace eTickets.PL.ViewModels.Movies
 {
-    public class Movie:BaseEntity
-    { 
+    public class MovieViewModel
+    {
         public string Name { get; set; }
         public string Description { get; set; }
-       
+
         public double Price { get; set; }
 
         public string ImageURL { get; set; }
@@ -34,8 +29,6 @@ namespace eTickets.DAL.Models
 
         public Producer Producer { get; set; }
 
-        public ICollection<Actors_Movies > Actors_Movies=new HashSet<Actors_Movies>();  
-
-
+        public ICollection<Actors_Movies> Actors_Movies = new HashSet<Actors_Movies>();
     }
 }
