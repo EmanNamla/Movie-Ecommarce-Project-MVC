@@ -24,5 +24,105 @@ namespace eTickets.PL.Controllers
             var MappedProducers = mapper.Map<IReadOnlyList<Producer>, IReadOnlyList<ProducersViewModel>>(Producers);
             return View(MappedProducers);
         }
+
+        #region Actions Create
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(ProducersViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var MappedProducer = mapper.Map<ProducersViewModel, Producer>(model);
+                    await unitofWork.Repository<Producer>().AddAsync(MappedProducer);
+                    await unitofWork.CompleteAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch(Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                    return View(model);
+                }
+            }
+            return View(model);
+        }
+        #endregion
+
+        #region Action Details
+        public async Task<IActionResult> Details(int? id, string? ViewName = "Details")
+        {
+            if (id is null) { return BadRequest(); }
+            var Producers = await unitofWork.Repository<Producer>().GetByIdAsync(id.Value);
+            if (Producers is null) { return NotFound(); }
+            var MappedProducers = mapper.Map<Producer, ProducersViewModel>(Producers);
+            return View(ViewName, MappedProducers);
+        }
+        #endregion
+
+        #region Actions Edit
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            return await Details(id, "Edit");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit([FromRoute] int? id, ProducersViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var MappedProducer = mapper.Map<ProducersViewModel, Producer>(model);
+                    unitofWork.Repository<Producer>().Update(MappedProducer);
+                    await unitofWork.CompleteAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                    return View(model);
+                }
+            }
+            return View(model);
+        }
+        #endregion
+
+        #region Actions Delete
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            return await Details(id, "Delete");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete([FromRoute] int? id, ProducersViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var ProducerActor = mapper.Map<ProducersViewModel, Producer>(model);
+                    unitofWork.Repository<Producer>().Delete(ProducerActor);
+                    await unitofWork.CompleteAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                    return View(model);
+                }
+            }
+            return View(model);
+        }
+        #endregion
     }
 }

@@ -34,26 +34,40 @@ namespace eTickets.PL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ActorsViewModel model)
         {
+
             if (ModelState.IsValid)
             {
-                var MappedActor = mapper.Map<ActorsViewModel, Actor>(model);
-                await unitofWork.Repository<Actor>().AddAsync(MappedActor);
-                await unitofWork.CompleteAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    var MappedActor = mapper.Map<ActorsViewModel, Actor>(model);
+                    await unitofWork.Repository<Actor>().AddAsync(MappedActor);
+                    await unitofWork.CompleteAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                    return View(model);
+                }
             }
             return View(model);
         }
-        #endregion
+            #endregion
 
 
-        public async Task<IActionResult> Details(int? id, string? ViewName="Details")
+        #region Action Details
+            public async Task<IActionResult> Details(int? id, string? ViewName = "Details")
         {
             if (id is null) { return BadRequest(); }
             var Actors = await unitofWork.Repository<Actor>().GetByIdAsync(id.Value);
             if (Actors is null) { return NotFound(); }
             var MappedActors = mapper.Map<Actor, ActorsViewModel>(Actors);
             return View(ViewName, MappedActors);
-        }
+        } 
+        #endregion
+
+
+        #region Actions Edit
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -61,7 +75,7 @@ namespace eTickets.PL.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([FromRoute]int? id,ActorsViewModel model)
+        public async Task<IActionResult> Edit([FromRoute] int? id, ActorsViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -74,13 +88,15 @@ namespace eTickets.PL.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError(string.Empty,ex.Message);
+                    ModelState.AddModelError(string.Empty, ex.Message);
                     return View(model);
                 }
             }
             return View(model);
         }
+        #endregion
 
+        #region Actions Delete
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -107,6 +123,7 @@ namespace eTickets.PL.Controllers
                 }
             }
             return View(model);
-        }
+        } 
+        #endregion
     }
 }
