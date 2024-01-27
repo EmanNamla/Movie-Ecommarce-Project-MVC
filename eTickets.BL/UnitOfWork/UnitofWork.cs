@@ -30,7 +30,7 @@ namespace eTickets.BL.UnitOfWork
           await dbContext.DisposeAsync(); 
         }
 
-        public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
+        public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
             var type = typeof(TEntity).Name;
 

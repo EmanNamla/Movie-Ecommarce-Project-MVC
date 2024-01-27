@@ -1,6 +1,6 @@
 ﻿@model IReadOnlyList<MovieViewModel>
 @{
-    ViewData["Title"] = "List Of Movie";
+    ViewData["Title"] = "List Of Movies";
 }
 
 
@@ -15,7 +15,7 @@
                             <p class="card-text">
                                 <h5 class="card-title">
                                    @item.Name
-                                    <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
+                                    <a asp-action="Edit" asp-route-Id="@item.Id" class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
                                 </h5>
                             </p>
 
@@ -29,10 +29,10 @@
                     <div class="col-md-6">
                         <div class="card-body">
                             <p class="card-text">@item.Description</p>
-                            <p class="card-text"><b>Cinema:</b>@item.Cinema.Name</p>
+                          <p class="card-text"><b>Cinema:</b>@item.CinemaName</p>
                             <p class="card-text"><b>Category:</b>@item.MovieCategory</p>
-                            <p class="card-text"><b>StartDate:</b>@item.StartDate.ToString("dd MMM yy")</p>
-                            <p class="card-text"><b>EndDate:</b>@item.EndDate.ToString("dd MMM yy")</p>
+                            <p class="card-text"><b>StartDate:</b>@item.StartDate.ToString("dd MM yyyy")</p>
+                            <p class="card-text"><b>EndDate:</b>@item.EndDate.ToString("dd MM yyyy")</p>
                             <p class="card-text">
                                 <b>Status</b>
                                 @if(DateTime.Now>=@item.StartDate && DateTime.Now<=item.EndDate)
@@ -52,17 +52,22 @@
 
                     </div>
 
-                    <div class="col-md-12">
-                        <div class="card-footer">
+
+                    
+                <div class="col-md-12">
+                    <div class="card-footer d-flex justify-content-between">
+                        <div class="text-start">
                             <p class="card-text">
-                                
-                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i>Add To Cart (Price @item.Price.ToString("c"))</a>
-                                <a class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill"></i>ShowDetails</a>
+                                 <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i>ShowDetails</a>
+                            </p>
+                        </div>
+                        <div class="text-end">
+                            <p class="card-text">
+                                    <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Add To Cart (Price @item.Price.ToString("c"))</a>
                             </p>
                         </div>
                     </div>
-
-
+                </div>
 
                    
                      

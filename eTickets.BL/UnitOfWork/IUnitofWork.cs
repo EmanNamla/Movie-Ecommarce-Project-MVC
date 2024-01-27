@@ -10,7 +10,7 @@ namespace eTickets.BL.UnitOfWork
 {
     public interface IUnitofWork:IAsyncDisposable
     {
-        public IGenericRepository<TEntity> Repository<TEntity>()where TEntity:BaseEntity;
+        public IGenericRepository<TEntity> Repository<TEntity>()where TEntity:class;
 
          Task<int> CompleteAsync();
 

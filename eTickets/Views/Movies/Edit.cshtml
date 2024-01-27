@@ -1,0 +1,135 @@
+﻿@using eTickets.DAL.Data.Enums;
+@using eTickets.DAL.Models;
+@model MovieViewModel
+@{
+    var Cinemas = new SelectList(ViewBag.Cinemas, "Id", "Name");
+    var Actors = new SelectList(ViewBag.Actors, "Id", "FullName");
+    var Producers = new SelectList(ViewBag.Producers, "Id", "FullName");
+    ViewData["Title"] = "Create a New Movie";
+}
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h4>Create a new Movie</h4>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="All"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="@Model.Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            &nbsp;
+                            <div class="form-group">
+                                <label asp-for="StartDate" class="control-label"></label>
+                                <input asp-for="@Model.StartDate" class="form-control" />
+                                <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+                            </div>
+                            &nbsp;
+                            <div class="form-group">
+                                <label asp-for="@Model.EndDate" class="control-label"></label>
+                                <input asp-for="@Model.EndDate" class="form-control" />
+                                <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
+                            </div>
+                            &nbsp;
+                            <div class="form-group">
+                                <label asp-for="@Model.Price" class="control-label"></label>
+                                <input type="number" asp-for="@Model.Price" class="form-control" />
+                                <span asp-validation-for="@Model.Price" class="text-danger"></span>
+                            </div>
+                            &nbsp;
+                            <div class="form-group">
+                                <label asp-for="@Model.ImageURL" class="control-label"></label>
+                                <input asp-for="@Model.ImageURL" class="form-control" />
+                                <span asp-validation-for="@Model.ImageURL" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="@Model.CinemaId" class="control-label"></label>
+                                <select asp-for="@Model.CinemaId" class="form-control" asp-items="Cinemas">
+                                    <option value="" disabled selected>------Select Cinema------</option>
+                                </select>
+                                <span asp-validation-for="@Model.CinemaId" class="text-danger"></span>
+                            </div>
+                            &nbsp;
+                            <div class="form-group">
+                                <label asp-for="@Model.MovieCategory" class="control-label"></label>
+                                <select asp-for="@Model.MovieCategory" class="form-control" asp-items="Html.GetEnumSelectList<MovieCategory>()">
+                                    <option value="" disabled selected>------Select MovieCategory------</option>
+                                </select>
+                                <span asp-validation-for="@Model.MovieCategory" class="text-danger"></span>
+                            </div>
+                            &nbsp;
+                            <div class="form-group">
+                                <label asp-for="@Model.ProducerId" class="control-label"></label>
+                                <select asp-for="@Model.ProducerId" class="form-control" asp-items="Producers">
+                                    <option value="" disabled selected>------Select Producer------</option>
+                                </select>
+                                <span asp-validation-for="@Model.ProducerId" class="text-danger"></span>
+                            </div>
+                            &nbsp;
+                            <div class="form-group">
+                                <label asp-for="@Model.ActorIds" class="control-label"></label>
+                                <select asp-for="@Model.ActorIds" class="form-control" asp-items="Actors">
+                                    <option value="" disabled selected>------Select Actors------</option>
+                                </select>
+                                <span asp-validation-for="@Model.ActorIds" class="text-danger"></span>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="@Model.Description" class="control-label"></label>
+                                <textarea asp-for="@Model.Description" class="form-control"></textarea>
+                                <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 offset-4 text-center">
+                        <img width="100%" id="ImageUrlPreview" />
+                    </div>
+
+                    <div class="form-group d-flex justify-content-between">
+
+                        <a asp-action="index" class="btn btn-outline-secondary">Show All</a>
+                        <input type="submit" value="Edit" class="btn btn-primary" />
+                    </div>
+
+
+
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <script>
+
+        $(document).ready(function () {
+            var output = document.getElementById('ImageUrlPreview');
+            output.src = $("#ImageURL").val();
+        })
+
+        $("#ImageURL").on("change", function () {
+            var output = document.getElementById('ImageUrlPreview');
+            output.src = $(this).val();
+        })
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,41 @@
+﻿@model CinemasViewModel
+<div class="row text">
+    <div class="row text" style="margin-bottom: 190px;">
+        <div class="col-md-8 offset-2">
+            <p>
+                <h1>Delete @Model.Name</h1>
+            </p>
+            <div class="row">
+                <div class="col-md-8 offset-2">
+                    <form asp-action="Delete">
+                       
+
+
+                        <partial name="_partialviews/_DetailsDeletePartialView" />
+
+                        <div class="form-group mt-3 d-flex justify-content-between">
+                            <a class="btn btn-outline-secondary" asp-action="index">Show All</a>
+                            <input type="submit" value="Delete" class="btn btn-outline-danger" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script>
+
+        $(document).ready(function () {
+            var output = document.getElementById('CinemaLogoPreview');
+            output.src = $("#Logo").val();
+        })
+
+        $("#Logo").on("change", function () {
+            var output = document.getElementById('CinemaLogoPreview');
+            output.src = $(this).val();
+        })
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

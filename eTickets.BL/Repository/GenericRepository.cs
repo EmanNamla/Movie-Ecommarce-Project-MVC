@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace eTickets.BL.Repository
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly AppDbContext dbContext;
 
@@ -21,12 +21,25 @@ namespace eTickets.BL.Repository
         }
         #region Befour Specification
         public async Task<IReadOnlyList<T>> GetAllAsync()
-
-        => await dbContext.Set<T>().ToListAsync();
+        { 
+            return await dbContext.Set<T>().ToListAsync();
+        }
 
 
         public async Task<T> GetByIdAsync(int id)
-         => await dbContext.Set<T>().FindAsync(id);
+        {
+            if (typeof(T) == typeof(Movie))
+            {
+                return await dbContext.Movies
+                    .Include(m => m.Producer)
+                    .Include(m => m.Cinema)
+                    .Include(m => m.Actors_Movies)
+                        .ThenInclude(am => am.Actor)
+                    .FirstOrDefaultAsync(m => m.Id == id) as T;
+            }
+            return await dbContext.Set<T>().FindAsync(id);
+        }
+
 
         public async Task AddAsync(T item)
         { await dbContext.Set<T>().AddAsync(item); }
@@ -40,6 +53,13 @@ namespace eTickets.BL.Repository
         {
             dbContext.Set<T>().Update(item);
         }
+
+
+        public void RemoveRenge(IEnumerable<T> item)
+        {
+            dbContext.Set<T>().RemoveRange(item);
+        }
+
         #endregion
 
         #region After Specification
@@ -58,6 +78,7 @@ namespace eTickets.BL.Repository
         {
             return await ApplySpecification(spec).FirstOrDefaultAsync();
         }
+
 
         #endregion
     }

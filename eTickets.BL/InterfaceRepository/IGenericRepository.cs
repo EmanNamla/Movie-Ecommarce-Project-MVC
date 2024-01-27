@@ -8,17 +8,20 @@ using System.Threading.Tasks;
 
 namespace eTickets.BL.InterfaceRepository
 {
-    public interface IGenericRepository<T> where T:BaseEntity 
+    public interface IGenericRepository<T> where T:class 
     {
         #region Befoure Specification
        Task< IReadOnlyList<T>> GetAllAsync();
 
         Task<T> GetByIdAsync(int id);
 
+        
         Task AddAsync(T item);
         void Update(T item);
 
         void Delete(T item);
+
+        void RemoveRenge(IEnumerable<T> item);
         #endregion
 
         #region After Specification

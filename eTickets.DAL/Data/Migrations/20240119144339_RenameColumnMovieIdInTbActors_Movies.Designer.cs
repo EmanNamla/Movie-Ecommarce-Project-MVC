@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eTickets.DAL.Contexts;
 
@@ -11,9 +12,10 @@ using eTickets.DAL.Contexts;
 namespace eTickets.DAL.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240119144339_RenameColumnMovieIdInTbActors_Movies")]
+    partial class RenameColumnMovieIdInTbActors_Movies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +46,7 @@ namespace eTickets.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actors", (string)null);
+                    b.ToTable("Actors");
                 });
 
             modelBuilder.Entity("eTickets.DAL.Models.Actors_Movies", b =>
@@ -59,7 +61,7 @@ namespace eTickets.DAL.Data.Migrations
 
                     b.HasIndex("ActorId");
 
-                    b.ToTable("Actors_Movies", (string)null);
+                    b.ToTable("Actors_Movies");
                 });
 
             modelBuilder.Entity("eTickets.DAL.Models.Cinema", b =>
@@ -84,7 +86,7 @@ namespace eTickets.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cinemas", (string)null);
+                    b.ToTable("Cinemas");
                 });
 
             modelBuilder.Entity("eTickets.DAL.Models.Movie", b =>
@@ -131,7 +133,7 @@ namespace eTickets.DAL.Data.Migrations
 
                     b.HasIndex("ProducerId");
 
-                    b.ToTable("Movies", (string)null);
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("eTickets.DAL.Models.Producer", b =>
@@ -156,7 +158,7 @@ namespace eTickets.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Producers", (string)null);
+                    b.ToTable("Producers");
                 });
 
             modelBuilder.Entity("eTickets.DAL.Models.Actors_Movies", b =>

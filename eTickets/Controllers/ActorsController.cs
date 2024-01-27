@@ -25,7 +25,7 @@ namespace eTickets.PL.Controllers
 
         #region Actions Create
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public  IActionResult Create()
         {
             return View();
         }

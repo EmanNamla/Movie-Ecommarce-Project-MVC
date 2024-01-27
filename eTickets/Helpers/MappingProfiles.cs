@@ -14,7 +14,13 @@ namespace eTickets.PL.Helpers
             CreateMap<Actor,ActorsViewModel>().ReverseMap();
             CreateMap<Producer, ProducersViewModel>().ReverseMap();
             CreateMap<Cinema, CinemasViewModel>().ReverseMap();
-            CreateMap<Movie, MovieViewModel>().ReverseMap();
+            CreateMap<Movie, MovieViewModel>()
+            .ForMember(m => m.CinemaName, o => o.MapFrom(m => m.Cinema.Name))
+            .ForMember(m => m.ProducerName, o => o.MapFrom(m => m.Producer.FullName))
+            .ForMember(dest => dest.ActorIds, opt => opt.MapFrom(src => src.Actors_Movies.Select(am => am.ActorId).ToList()))
+            .ReverseMap();
+
+
         }
     }
 }

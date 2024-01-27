@@ -13,9 +13,9 @@ namespace eTickets.DAL.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Actors_Movies> builder)
         {
-            builder.HasKey(Am=> new {Am.MoviesId,Am.ActorId});
+            builder.HasKey(Am=> new {Am.MovieId,Am.ActorId});
             builder.HasOne(Am => Am.Actor).WithMany(Am=>Am.Actors_Movies).HasForeignKey(Am=>Am.ActorId);
-            builder.HasOne(Am => Am.Movie).WithMany(Am => Am.Actors_Movies).HasForeignKey(Am => Am.MoviesId);
+            builder.HasOne(Am => Am.Movie).WithMany(Am => Am.Actors_Movies).HasForeignKey(Am => Am.MovieId);
         }
     }
 }

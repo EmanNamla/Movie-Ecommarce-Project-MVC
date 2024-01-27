@@ -1,14 +1,13 @@
-﻿@model eTickets.PL.ViewModels.Actors.ActorsViewModel
-
+﻿@model CinemasViewModel
 @{
-    ViewData["Title"] = "Add New Actor";
+    ViewData["Title"] = "Add New Cinema";
 }
 
 <div class="row text">
     <div class="row text" style="margin-bottom: 190px;">
         <div class="col-md-8 offset-2">
         <p>
-            <h1>Add a New Actor</h1>
+                <h1>Add a New Cinema</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
@@ -16,7 +15,6 @@
                     <div asp-validation-summary="All" class="text-danger"></div>
 
                         <partial name="_partialviews/_CreateEditPartailView" />
-
 
                     <div class="form-group mt-3 d-flex justify-content-between">
                         <a class="btn btn-outline-secondary" asp-action="index">Show All</a>
@@ -34,12 +32,12 @@
     <script>
 
         $(document).ready(function () {
-            var output = document.getElementById('ProfilePicturePreview');
-            output.src = $("#ProfilePictureUrl").val();
+            var output = document.getElementById('CinemaLogoPreview');
+            output.src = $("#Logo").val();
         })
 
-        $("#ProfilePictureUrl").on("change", function () {
-            var output = document.getElementById('ProfilePicturePreview');
+        $("#Logo").on("change", function () {
+            var output = document.getElementById('CinemaLogoPreview');
             output.src = $(this).val();
         })
     </script>
