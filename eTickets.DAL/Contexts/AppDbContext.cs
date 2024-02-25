@@ -1,4 +1,5 @@
 ﻿using eTickets.DAL.Models;
+using eTickets.DAL.Models.Order;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,5 +29,12 @@ namespace eTickets.DAL.Contexts
         public DbSet<Movie> Movies { get; set; }    
 
         public DbSet<Producer> Producers { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+
     }
 }

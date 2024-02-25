@@ -8,6 +8,6 @@
       
         public string Bio { get; set; }
 
-        public ICollection<Actors_Movies> Actors_Movies = new HashSet<Actors_Movies>();
+        public ICollection<Actors_Movies> Actors_Movies { get; set; } = new HashSet<Actors_Movies>();
     }
 }

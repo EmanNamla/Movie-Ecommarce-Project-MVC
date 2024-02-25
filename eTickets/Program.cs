@@ -4,6 +4,9 @@ using eTickets.DAL.Data.DataSeed;
 using eTickets.PL.Helpers;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using eTickets.DAL.Models.Order;
+using eTickets.BL.Service.Abstration;
+using eTickets.BL.Service.Implementation;
 
 namespace eTickets
 {
@@ -21,9 +24,15 @@ namespace eTickets
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefultConnectionString"));
             });
-            //Allow DJ To UnitofWork And AutoMapper
+            //Allow DJ 
             builder.Services.AddScoped<IUnitofWork, UnitofWork>();
             builder.Services.AddAutoMapper(typeof(MappingProfiles));
+            builder.Services.AddScoped<ShoppingCart>();
+            //ShoppingCart
+            builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+            builder.Services.AddScoped(sc=>ShoppingCart.GetShoppingCart(sc));
+            builder.Services.AddSession();
+            builder.Services.AddScoped<IOrderServices,OrderServices>();
 
             var app = builder.Build();
 
@@ -49,7 +58,7 @@ namespace eTickets
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.MapControllerRoute(
